@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <h2> Task Application</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <form #taskForm="ngForm" class="col-sm-12" (ngSubmit)="addTask(taskForm)">
+
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="taskService.selectedTask._id"> 
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="exampleInputName">Name</label>
+                        <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="taskService.selectedTask.name" aria-describedby="nameHelp" placeholder="Task name">
+                    </div>
+                </div>
+        
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="exampleInputdescription">Description</label>
+                        <input type="text" class="form-control" name="description" #description="ngModel" [(ngModel)]="taskService.selectedTask.description" aria-describedby="descriptionHelp" placeholder="Task Description">
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="exampleInputfinish">Finish</label>
+                        <input type="text" class="form-control" name="finish" #description="ngModel" [(ngModel)]="taskService.selectedTask.finish" aria-describedby="descriptionHelp" placeholder="Finish?">
+                    </div>
+                </div>
+    
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary" (click)="addTask(taskForm)">Save</button>
+                    <button type="button" class="btn btn-dark margin-left-10" (click)="resetForm(taskForm)">Reset</button>
+                </div>
+    
+            </form>
+            
+        </div>
+
+        <div class="col-sm-7">
+            <table class="col-sm-12 table"> 
+                <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Finish</th>
+                    <th>Last Update</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of taskService.tasks">
+                        <td>{{ task.name }} </td>
+                        <td>{{ task.description }} </td>
+                        <td>{{ task.finish }} </td>
+                        <td>{{ task.update }} </td>
+                        <td>
+                            <button class="btn btn-outline-primary btn-sm" (click)="editTask(task)">
+                                Update
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm margin-left-5" (click)="deleteTask(task._id)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
